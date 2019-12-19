@@ -40,9 +40,14 @@ export default {
     background-color: #F2F4F7;
     height: 100%;
     /* 分类页面轮播图 dots 样式 */
+    .category-page .second-banner .vux-slider {
+      border-radius: 4px;
+    }
     .category-dots-bottom {
-      bottom: -1px;
+      bottom: 8px;
       a {
+        height: 10px;
+        line-height: 10px;
         i {
           width: 4px;
           height: 4px;

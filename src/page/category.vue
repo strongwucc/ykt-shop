@@ -16,7 +16,8 @@
         <li class="second-item" v-for="(secondCategory, secondCategoryIndex) in secondCategories" :key="secondCategoryIndex">
           <div class="second-title" v-if="secondCategory.storeyName">{{secondCategory.storeyName}}</div>
           <div class="second-banner" v-if="secondCategory.storeyType === '0'">
-            <swiper auto loop :interval=5000 style="width:100%;margin:0 auto;" height="100px" dots-class="category-dots-bottom">
+            <!--<img class="banner-img" v-for="(thirdCategory, thirdCategoryIndex) in secondCategory.storeyPathList" :key="thirdCategoryIndex" :src="thirdCategory.pageStoreyPathPictureAddress" @click.stop="secondBannerRedirect(thirdCategory.pageStoreyPathForwordAddress)"/>-->
+            <swiper auto loop :interval=5000 style="margin:0;" :aspect-ratio="100/260" dots-class="category-dots-bottom">
               <swiper-item v-for="(thirdCategory, thirdCategoryIndex) in secondCategory.storeyPathList" :key="thirdCategoryIndex">
                 <img class="banner-img" :src="thirdCategory.pageStoreyPathPictureAddress" @click.stop="secondBannerRedirect(thirdCategory.pageStoreyPathForwordAddress)"/>
               </swiper-item>
@@ -67,8 +68,12 @@ export default {
     this.getCategory()
   },
   beforeDestroy () {
-    this.firstCategoryScroll.destroy()
-    this.secondCategoryScroll.destroy()
+    if (this.firstCategoryScroll) {
+      this.firstCategoryScroll.destroy()
+    }
+    if (this.secondCategoryScroll) {
+      this.secondCategoryScroll.destroy()
+    }
     this.firstCategoryScroll = null
     this.secondCategoryScroll = null
   },
@@ -96,6 +101,7 @@ export default {
     },
     getCategory (categoryId) {
       this.$http.post(this.API.category, {pageNum: categoryId}).then(res => {
+        // console.log(res)
         if (res.code === '0000') {
           if (categoryId) {
             this.secondCategories = res.data
@@ -110,6 +116,17 @@ export default {
               this.initFirstCategoryScroll()
             })
           }
+        } else {
+          // 系统或者网络出错啦TODO
+          // window.location.href = '' // 跳到 500 页面
+          this.$vux.toast.show({
+            type: 'text',
+            position: 'middle',
+            text: '<span style="font-size: 14px;">' + res.return_message + '</span>',
+            onHide () {
+              console.log('hidden')
+            }
+          })
         }
       })
       return true
@@ -208,10 +225,12 @@ export default {
             width: 100%;
             height: 100px;
             border-radius:4px;
+            overflow: hidden;
             .banner-img {
               width: 100%;
               height: 100px;
               border-radius:4px;
+              margin: 0;
             }
           }
           .third-category {

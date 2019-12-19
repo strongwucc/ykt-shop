@@ -46,14 +46,14 @@ export default class http {
       axios(options)
         .then((result) => {
           if (typeof result.data.code === 'undefined') {
-            resolve({code: '5000', return_message: '系统出错啦'})
+            resolve({code: '5000', return_message: '哎呀，系统出错啦'})
           } else {
             resolve(result.data)
           }
         })
         .catch((error) => {
           console.log(error)
-          resolve({code: '6000', return_message: '网络出错啦'})
+          resolve({code: '6000', return_message: '哎呀，网络出错啦'})
         })
     })
     return promise
