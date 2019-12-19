@@ -99,42 +99,46 @@ export default {
         })
       }
     },
-    getCategory (categoryId) {
+    getCategory (categoryId, firstCategoryIndex) {
       this.$http.post(this.API.category, {pageNum: categoryId}).then(res => {
         // console.log(res)
         if (res.code === '0000') {
           if (categoryId) {
             this.secondCategories = res.data
+            this.activeIndex = firstCategoryIndex
             this.$nextTick(() => {
               this.initSecondCategoryScroll()
             })
           } else {
             this.firstCategories = res.data
             this.activeIndex = 0
-            this.getCategory(this.firstCategories[0].pageNum)
+            this.getCategory(this.firstCategories[0].pageNum, 0)
             this.$nextTick(() => {
               this.initFirstCategoryScroll()
             })
           }
         } else {
+          console.log(res)
           // 系统或者网络出错啦TODO
           // window.location.href = '' // 跳到 500 页面
+          /*
           this.$vux.toast.show({
             type: 'text',
             position: 'middle',
             text: '<span style="font-size: 14px;">' + res.return_message + '</span>',
             onHide () {
+              // 提示消失后触发
               console.log('hidden')
             }
           })
+          */
         }
       })
       return true
     },
     selectFirstCategory (firstCategoryIndex) {
       if (this.activeIndex !== firstCategoryIndex) {
-        this.activeIndex = firstCategoryIndex
-        this.getCategory(this.firstCategories[firstCategoryIndex].pageNum)
+        this.getCategory(this.firstCategories[firstCategoryIndex].pageNum, firstCategoryIndex)
       }
     },
     secondBannerRedirect (url) {

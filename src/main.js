@@ -14,8 +14,8 @@ import './assets/css/reset.css'
 import './assets/css/vux-reset.css'
 import { LoadingPlugin, ToastPlugin } from 'vux'
 
-import VConsole from 'vconsole'
-var vConsole = new VConsole()
+// import VConsole from 'vconsole'
+// var vConsole = new VConsole()
 
 Vue.config.productionTip = false
 
@@ -52,9 +52,9 @@ Vue.prototype.API = api
 
 router.beforeEach((to, from, next) => {
   /* 路由发生变化修改页面title */
-  if (to.meta.title) {
-    document.title = to.meta.title
-  }
+  // if (to.meta.title) {
+  //   document.title = to.meta.title
+  // }
   next()
 })
 
