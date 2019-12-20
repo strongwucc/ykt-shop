@@ -192,7 +192,7 @@ export default {
         .active {
           font-size:14px;
           font-weight:bold;
-          color:rgba(214,108,108,1);
+          color:rgba(239,50,50,1);
           background:rgba(255,255,255,1);
           &:before {
             content: '';
@@ -200,7 +200,7 @@ export default {
             float: left;
             width: 4px;
             height: 16px;
-            background: rgba(214,108,108,1);
+            background: rgba(239,50,50,1);
             border-radius: 2px;
             margin-top: 20px;
           }
@@ -222,7 +222,7 @@ export default {
             line-height:17px;
             color:rgba(51,51,51,1);
             text-align: left;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             overflow: hidden;
           }
           .second-banner {
@@ -239,9 +239,9 @@ export default {
           }
           .third-category {
             width: 100%;
-            box-shadow:0px 5px 12px rgba(0,0,0,0.04);
+            box-shadow:0px 0px 20px rgba(0,0,0,0.04);
             border-radius:4px;
-            padding: 0 7px;
+            padding: 0 16px;
             .third-category-list {
               display: flex;
               justify-content: flex-start;
@@ -252,14 +252,16 @@ export default {
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                margin-top: 12px;
-                margin-left: 32px;
+                margin-top: 16px;
+                margin-left: 23px;
                 width: 60px;
                 img {
                   width: 60px;
                   height: 60px;
+                  border-radius: 4px;
                 }
                 span {
+                  width: 100%;
                   height: 33px;
                   font-size: 11px;
                   font-weight: 400;
@@ -268,6 +270,8 @@ export default {
                   margin-top: 4px;
                   text-align: center;
                   overflow: hidden;
+                  word-wrap: break-word;
+                  white-space:normal;
                 }
               }
               li:nth-child(3n+1) {
